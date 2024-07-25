@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <div class="app">
+        <div class="sidebar bg-light border-right" id="sidebar">
+            <button class="btn btn-link toggle-sidebar" onclick="toggleSidebar()">&#9776;</button>
+            <div class="sidebar-content">
+                <button class="btn btn-link" onclick="loadReport()">Отчет по производственной практике</button>
+                <button class="btn btn-link" onclick="loadDiary()">Дневник практики</button>
+                <button class="btn btn-primary print-button" onclick="printDocument()">Печать</button>
+            </div>
+        </div>
+        <div class="inputs" id="input-container"></div>
+        <div class="output p-4" id="content">
+            <h3 id="header-title" class="header-title">Документ</h3>
+            <div id="content-container"></div>
+        </div>
+    </div>
+</body>
+
+</html>

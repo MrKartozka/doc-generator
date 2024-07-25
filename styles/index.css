@@ -1,0 +1,125 @@
+.container {
+    gap: 20px;
+    padding: 20px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.inputs {
+    flex: 1 1 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.output {
+    flex: 1 1 70%;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+.header-title {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    transition: width 0.3s;
+    overflow-x: hidden;
+}
+
+.sidebar.collapsed {
+    width: 50px;
+}
+
+.sidebar button.toggle-sidebar {
+    align-self: flex-start;
+    margin: 10px;
+}
+
+.sidebar .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 10px;
+}
+
+.sidebar button {
+    margin: 5px;
+}
+
+.filled {
+    background-color: #d0f0c0;
+}
+
+.filled input,
+.filled textarea {
+    background-color: #d0f0c0;
+}
+
+.filled .MuiSelect-select {
+    background-color: #d0f0c0;
+}
+
+.print-button {
+    margin-top: 20px;
+}
+
+.textarea-container {
+    margin-bottom: 10px;
+}
+
+@media print {
+
+    .sidebar,
+    .inputs,
+    .header-title {
+        display: none !important;
+    }
+
+    .content {
+        margin: auto;
+        width: 100%;
+        overflow: visible !important;
+    }
+
+    .content::-webkit-scrollbar {
+        display: none;
+    }
+
+    .hidden-print {
+        display: none !important;
+    }
+
+    .content {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .inputs,
+    .output {
+        overflow: visible !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .output {
+        height: auto;
+    }
+}
