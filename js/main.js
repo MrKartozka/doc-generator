@@ -6,30 +6,51 @@ const inputFields = {
 let documentData = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed');
+    const contentContainer = document.getElementById('content-container');
+    const headerTitle = document.getElementById('header-title');
+
+    if (contentContainer) {
+        console.log('Content container found on DOMContentLoaded');
+    } else {
+        console.error('Content container not found on DOMContentLoaded');
+    }
+
+    if (headerTitle) {
+        console.log('Header title found on DOMContentLoaded');
+    } else {
+        console.error('Header title not found on DOMContentLoaded');
+    }
+
     loadReport();
 });
 
 function loadReport() {
-    loadContent('../docs/report.html', '../docs/styles/report.css', 'Отчет по производственной практике');
+    loadContent('docs/report.html', 'docs/styles/report.css', 'Отчет по производственной практике');
 }
 
 function loadDiary() {
-    loadContent('../docs/diary.html', '../docs/styles/diary.css', 'Дневник практики');
+    loadContent('docs/diary.html', 'docs/styles/diary.css', 'Дневник практики');
 }
 
 function loadContent(htmlPath, cssPath, title) {
+    console.log('Attempting to load content from', htmlPath);
+    console.log('Applying styles from', cssPath);
+
     const contentContainer = document.getElementById('content-container');
     const headerTitle = document.getElementById('header-title');
 
-    // Проверка, что контейнеры существуют
-    if (!contentContainer || !headerTitle) {
-        console.error('Content container or header title not found');
+    if (!contentContainer) {
+        console.error('Content container not found');
+        return;
+    }
+    if (!headerTitle) {
+        console.error('Header title not found');
         return;
     }
 
     console.log('Content container and header title found');
 
-    // Загрузка HTML контента
     fetch(htmlPath)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
@@ -82,7 +103,7 @@ function updateDocument() {
     const content = localStorage.getItem('content') || 'report';
     const contentContainer = document.getElementById('content-container');
 
-    fetch(content === 'diary' ? '../docs/diary.html' : '../docs/report.html')
+    fetch(content === 'diary' ? 'docs/diary.html' : 'docs/report.html')
         .then(response => response.text())
         .then(data => {
             for (let key in documentData) {
