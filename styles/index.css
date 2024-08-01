@@ -119,3 +119,12 @@
         height: auto;
     }
 }
+
+@page {
+    size: A4;
+    margin: 20mm;
+}
+
+.new-page {
+    break-before: page;
+}

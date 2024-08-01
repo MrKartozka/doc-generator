@@ -6,24 +6,20 @@ const inputFields = {
 let documentData = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
-    const contentContainer = document.getElementById('content-container');
+    initialize();
+});
+
+function initialize() {
+    const contentContainer = document.getElementById('preview-container');
     const headerTitle = document.getElementById('header-title');
 
-    if (contentContainer) {
-        console.log('Content container found on DOMContentLoaded');
+    if (contentContainer && headerTitle) {
+        console.log('Content container and header title found on DOMContentLoaded');
+        loadReport();
     } else {
-        console.error('Content container not found on DOMContentLoaded');
+        console.error('Content container or header title not found on DOMContentLoaded');
     }
-
-    if (headerTitle) {
-        console.log('Header title found on DOMContentLoaded');
-    } else {
-        console.error('Header title not found on DOMContentLoaded');
-    }
-
-    loadReport();
-});
+}
 
 function loadReport() {
     loadContent('docs/report.html', 'docs/styles/report.css', 'Отчет по производственной практике');
@@ -37,30 +33,24 @@ function loadContent(htmlPath, cssPath, title) {
     console.log('Attempting to load content from', htmlPath);
     console.log('Applying styles from', cssPath);
 
-    const contentContainer = document.getElementById('content-container');
+    const contentContainer = document.getElementById('preview-container');
     const headerTitle = document.getElementById('header-title');
 
-    if (!contentContainer) {
-        console.error('Content container not found');
+    if (!contentContainer || !headerTitle) {
+        console.error('Preview container or header title not found');
         return;
     }
-    if (!headerTitle) {
-        console.error('Header title not found');
-        return;
-    }
-
-    console.log('Content container and header title found');
 
     fetch(htmlPath)
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
-            return response.text();
-        })
+        .then(response => response.ok ? response.text() : Promise.reject(response.statusText))
         .then(html => {
             contentContainer.innerHTML = html;
             headerTitle.textContent = title;
-            createForm(title.toLowerCase().includes('дневник') ? 'diary' : 'report');
             applyStyles(cssPath);
+            createForm(title.toLowerCase().includes('дневник') ? 'diary' : 'report');
+            window.PagedPolyfill.preview().then(() => {
+                // Дополнительные действия после рендеринга Paged.js, если необходимо
+            });
         })
         .catch(error => console.error('Error loading content:', error));
 }
@@ -101,7 +91,7 @@ function handleInputChange(event) {
 
 function updateDocument() {
     const content = localStorage.getItem('content') || 'report';
-    const contentContainer = document.getElementById('content-container');
+    const contentContainer = document.getElementById('preview-container');
 
     fetch(content === 'diary' ? 'docs/diary.html' : 'docs/report.html')
         .then(response => response.text())
@@ -111,6 +101,8 @@ function updateDocument() {
                 data = data.replace(regex, documentData[key]);
             }
             contentContainer.innerHTML = data;
+            // Запуск Paged.js после обновления контента
+            window.PagedPolyfill.preview();
         })
         .catch(error => console.error('Error updating document:', error));
 }
