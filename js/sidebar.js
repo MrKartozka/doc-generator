@@ -14,6 +14,7 @@ function createSidebar() {
     const templates = [
         { text: "Отчет по производственной практике", template: "report" },
         { text: "Дневник практики", template: "diary" },
+        { text: "Предпросмотр", template: "preview" },
     ];
 
     templates.forEach(item => {

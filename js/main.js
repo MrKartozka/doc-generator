@@ -14,7 +14,6 @@ function initialize() {
     const headerTitle = document.getElementById('header-title');
 
     if (contentContainer && headerTitle) {
-        console.log('Content container and header title found on DOMContentLoaded');
         loadReport();
     } else {
         console.error('Content container or header title not found on DOMContentLoaded');
@@ -22,17 +21,21 @@ function initialize() {
 }
 
 function loadReport() {
-    loadContent('docs/report.html', 'docs/styles/report.css', 'Отчет по производственной практике');
+    localStorage.setItem('content', 'report');
+    loadContent('docs/report.html', '../styles/report.css', 'Отчет по производственной практике');
 }
 
 function loadDiary() {
-    loadContent('docs/diary.html', 'docs/styles/diary.css', 'Дневник практики');
+    localStorage.setItem('content', 'diary');
+    loadContent('docs/diary.html', '../styles/diary.css', 'Дневник практики');
+}
+
+function loadPreview() {
+    saveDocumentData();
+    window.open('preview.html', '_blank');
 }
 
 function loadContent(htmlPath, cssPath, title) {
-    console.log('Attempting to load content from', htmlPath);
-    console.log('Applying styles from', cssPath);
-
     const contentContainer = document.getElementById('preview-container');
     const headerTitle = document.getElementById('header-title');
 
@@ -48,9 +51,6 @@ function loadContent(htmlPath, cssPath, title) {
             headerTitle.textContent = title;
             applyStyles(cssPath);
             createForm(title.toLowerCase().includes('дневник') ? 'diary' : 'report');
-            window.PagedPolyfill.preview().then(() => {
-                // Дополнительные действия после рендеринга Paged.js, если необходимо
-            });
         })
         .catch(error => console.error('Error loading content:', error));
 }
@@ -64,15 +64,20 @@ function createForm(content) {
 
     container.innerHTML = '';
 
-    inputFields[content].forEach(field => {
+    const fields = inputFields[content];
+    if (!fields) {
+        console.error(`No input fields found for content: ${content}`);
+        return;
+    }
+
+    fields.forEach(field => {
         const inputGroup = document.createElement('div');
         inputGroup.className = 'form-group';
 
         const label = document.createElement('label');
         label.textContent = field;
 
-        const input = (field.startsWith("Индивидуальное задание") || field.startsWith("Характеристика-отзыв") || field.startsWith("Выводы и оценки кафедры")) ? 'textarea' : 'input';
-        const inputElement = document.createElement(input);
+        const inputElement = (field.startsWith("Индивидуальное задание") || field.startsWith("Характеристика-отзыв") || field.startsWith("Выводы и оценки кафедры")) ? document.createElement('textarea') : document.createElement('input');
         inputElement.name = field;
         inputElement.className = 'form-control';
         inputElement.value = documentData[field] || '';
@@ -101,8 +106,6 @@ function updateDocument() {
                 data = data.replace(regex, documentData[key]);
             }
             contentContainer.innerHTML = data;
-            // Запуск Paged.js после обновления контента
-            window.PagedPolyfill.preview();
         })
         .catch(error => console.error('Error updating document:', error));
 }
@@ -127,4 +130,8 @@ function toggleSidebar() {
 
 function printDocument() {
     window.print();
+}
+
+function saveDocumentData() {
+    localStorage.setItem('documentData', JSON.stringify(documentData));
 }

@@ -11,12 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/main.js" defer></script>
-    <script>
+    <!-- <script>
         window.PagedConfig = {
             auto: false
         };
     </script>
-    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js" defer></script>
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js" defer></script> -->
 </head>
 
 <body>
@@ -27,6 +27,7 @@
                 <button class="btn btn-link" onclick="loadReport()">Отчет по производственной практике</button>
                 <button class="btn btn-link" onclick="loadDiary()">Дневник практики</button>
                 <button class="btn btn-primary print-button" onclick="printDocument()">Печать</button>
+                <button class="btn btn-preview doc" onclick="loadPreview()">Показать готовый документ</button>
             </div>
         </div>
         <div class="inputs-container">
