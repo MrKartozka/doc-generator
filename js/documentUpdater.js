@@ -1,11 +1,10 @@
 function updateDocument() {
+    const documentData = JSON.parse(localStorage.getItem('documentData')) || {};
     const content = localStorage.getItem('content') || 'report';
     const contentContainer = document.getElementById('preview-container');
 
     fetch(content === 'diary' ? 'docs/diary.html' : 'docs/report.html')
-        .then(response => {
-            return response.text();
-        })
+        .then(response => response.text())
         .then(data => {
 
             data = data.replace('___ФАКУЛЬТЕТ___', documentData['ФАКУЛЬТЕТ'] || ' ');
@@ -63,3 +62,4 @@ function updateDocument() {
         })
         .catch(error => console.error('Ошибка при обновлении документа:', error));
 }
+window.updateDocument = updateDocument;
