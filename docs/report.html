@@ -7,7 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отчет по практике</title>
     <link rel="stylesheet" href="./styles/report.css">
+    <style>
+        .filled-line {
+            border-bottom: none;
+            /* Убираем подчеркивание */
+            font-weight: normal;
+            /* Снимаем жирный шрифт */
+        }
+
+        /* Скроем placeholders */
+        .line:empty:before {
+            content: " ";
+        }
+    </style>
 </head>
+
 
 <body>
     <div class="container">
@@ -70,13 +84,13 @@
             <span class="label"><strong>Руководитель по практической подготовке</strong></span>
             <span class="line">___Руководитель___</span>
         </div>
-        <small class="signature-right">(подпись, И.О.Фамилия)</small>
+        <small class="signature">(подпись, И.О.Фамилия)</small>
         <br><br>
         <div class="line-container">
             <span class="label"><strong>Оценка</strong></span>
             <span class="fixed-line">___Оценка___</span>
         </div>
-        <br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <center>
             Воронеж <span>___Календарный год___</span>
         </center>

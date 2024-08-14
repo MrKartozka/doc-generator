@@ -2,11 +2,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    counter-reset: section;
+    background: white !important;
+    /* Убедимся, что фон белый */
 }
 
 .container {
     width: 100%;
-    font-size: 14pt;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    page-break-inside: avoid;
 }
 
 .line-container {
@@ -14,26 +20,26 @@ body {
     align-items: baseline;
     width: 100%;
     margin-bottom: 3px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .label {
     white-space: nowrap;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .line {
     flex: 1;
     border-bottom: 1px solid black;
     margin-left: 10px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 
 }
 
 .line-center {
     flex: 1;
     margin-left: 10px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .fixed-line {
@@ -41,7 +47,7 @@ body {
     display: inline-block;
     width: 150px;
     margin-left: 10px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .signature {
@@ -58,19 +64,19 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .table th,
 .table td {
     border: 1px solid black;
     padding: 5px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .table th {
     background-color: #f2f2f2;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .middle-report-info {
@@ -79,6 +85,9 @@ body {
 
 .middle-report-end {
     margin-top: 200px;
+    /* Если этот отступ съезжает, уменьшите его */
+    text-align: center;
+    /* Центрируем текст */
 }
 
 .page-break {
@@ -90,17 +99,17 @@ body {
     align-items: baseline;
     width: 100%;
     margin-bottom: 15px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .multiline_text {
     flex: 1;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }
 
 .line-multiline {
     flex: 1;
     border-bottom: 1px solid black;
     margin-left: 10px;
-    font-size: 14pt;
+    /* font-size: 14pt; */
 }

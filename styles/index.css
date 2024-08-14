@@ -67,13 +67,24 @@
 .content-container {
     flex: 1;
     overflow-y: auto;
-    border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #ffffff;
     padding: 20px;
 }
 
+.hidden-line {
+    display: none;
+    /* Скрытие незаполненных строк */
+}
 
+.line {
+    border-bottom: none;
+    /* Убираем подчеркивание у всех элементов */
+}
+
+.line:empty {
+    visibility: hidden;
+}
 
 @media print {
 
@@ -86,27 +97,23 @@
     .content-container {
         margin: auto;
         width: 100%;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        page-break-before: always;
+    }
+
+    body {
         overflow: visible !important;
     }
 
-    .content-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .hidden-print {
-        display: none !important;
-    }
-
-    .content-container {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    .inputs-container,
-    .output-container {
-        overflow: visible !important;
+    @page {
+        size: auto;
+        margin: 20mm;
     }
 }
+
+
 
 @media (max-width: 768px) {
     .app {

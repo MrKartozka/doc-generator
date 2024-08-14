@@ -40,3 +40,18 @@ body {
 .pagedjs_page:last-of-type {
     margin-bottom: 5mm;
 }
+
+#title-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    /* break-before: page; */
+    /* break-after: page; */
+}
+
+#title-page-city_year {
+    margin-top: auto;
+    text-align: center;
+    break-after: page;
+}

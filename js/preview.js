@@ -46,13 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 for (let key in documentData) {
                     const regex = new RegExp(`___${key}___`, 'g');
-                    data = data.replace(regex, documentData[key]);
+                    const value = documentData[key] || ''; // Если данных нет, подставляем пустую строку
+                    data = data.replace(regex, value);
                 }
+
+                // Удаляем оставшиеся незаполненные аргументы
+                data = data.replace(/___\w+___/g, '');
+
                 contentContainer.innerHTML = data;
                 window.PagedPolyfill.preview().then(() => {
                     checkCSSLoaded(); // Проверяем, загрузился ли CSS
                 });
             })
-            .catch(error => console.error('Error loading content:', error));
+            .catch(error => console.error('Ошибка при загрузке контента:', error));
+
     }).catch(error => console.error(error));
 });
