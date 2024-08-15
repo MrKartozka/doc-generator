@@ -1,30 +1,25 @@
 function updateTableContent(practicePlans, documentData) {
-    console.log("updateTableContent called");
 
     const selectedPracticeType = documentData["Тип практики"];
     const selectedPractice = documentData["Вид практики"];
 
     if (!practicePlans || !practicePlans.types) {
-        console.error('practicePlans or practicePlans.types is undefined!');
         return;
     }
 
     const practicePlan = practicePlans.types.find(plan => plan.name === selectedPractice);
     if (!practicePlan) {
-        console.error('Practice Plan not found!');
         return;
     }
 
     const practiceTypeData = practicePlan.types.find(type => type.type === selectedPracticeType);
     if (!practiceTypeData) {
-        console.error('Practice Type Data not found!');
         return;
     }
 
     // Обновление таблицы с рабочим графиком
     const planTableBody = document.querySelector('.table:nth-of-type(1) tbody');
     if (!planTableBody) {
-        console.error('Plan table body not found!');
         return;
     }
 
@@ -53,14 +48,11 @@ function updateTableContent(practicePlans, documentData) {
 
             planTableBody.appendChild(row);
         });
-    } else {
-        console.error('Plan data not found or is not an array!');
     }
 
     // Обновление таблицы с компетенциями
     const competenciesTableBody = document.querySelector('.table:nth-of-type(3) tbody');
     if (!competenciesTableBody) {
-        console.error('Competencies table body not found!');
         return;
     }
 
@@ -89,9 +81,5 @@ function updateTableContent(practicePlans, documentData) {
 
             competenciesTableBody.appendChild(row);
         });
-    } else {
-        console.error('Competencies data not found or is not an array!');
     }
-
-    console.log('Tables updated with content');
 }

@@ -24,12 +24,7 @@ function loadPracticePlans() {
         .catch(error => console.error('Ошибка при загрузке practicePlans.json:', error));
 }
 
-function loadDiary() {
-    localStorage.setItem('content', 'diary');
-    loadContent('docs/diary.html', '../styles/diary.css', 'Дневник практики');
-}
-
-function loadContent(htmlPath, cssPath, title) {
+function loadContent(htmlPath, cssPath, title, contentType) {
     const contentContainer = document.getElementById('preview-container');
     const headerTitle = document.getElementById('header-title');
 
@@ -44,19 +39,40 @@ function loadContent(htmlPath, cssPath, title) {
             contentContainer.innerHTML = html;
             headerTitle.textContent = title;
             applyStyles(cssPath);
-            createForm(title.toLowerCase().includes('дневник') ? 'diary' : 'report');
+            createForm(contentType);
 
-            // Убедитесь, что таблица загружена перед вызовом updateTableContent
-            if (document.querySelector('.table tbody')) {
-                updateTableContent(practicePlans, documentData); // Обновляем таблицу после загрузки контента
-            } else {
-                console.error('Table body not found after content load!');
+            if (contentType === 'diary') {
+                const tableBody = document.querySelector('.table tbody');
+                if (tableBody) {
+                    updateTableContent(practicePlans, documentData);
+                } else {
+                    console.error('Table body not found after content load!');
+                }
             }
         })
         .catch(error => console.error('Ошибка при загрузке контента:', error));
 }
 
+function loadReport() {
+    localStorage.setItem('content', 'report');
+    loadContent('docs/report.html', '../styles/report.css', 'Отчет по практике', 'report');
+}
 
+function loadDiary() {
+    localStorage.setItem('content', 'diary');
+    loadContent('docs/diary.html', '../styles/diary.css', 'Дневник практики', 'diary');
+}
+
+function handleInputChange(event) {
+    documentData[event.target.name] = event.target.value.trim();
+    saveDocumentData(); // Сохраняем данные в localStorage при каждом изменении
+    updateDocument();  // Обновляем документ после изменения данных
+
+    // Вызываем обновление таблицы, если поле связано с типом или видом практики
+    if (event.target.name === "Тип практики" || event.target.name === "Вид практики") {
+        updateTableContent(practicePlans, documentData);
+    }
+}
 
 function createForm(content) {
     const container = document.getElementById('input-container');
@@ -100,7 +116,11 @@ function createForm(content) {
     });
 
     updateDocument();  // Обновляем документ сразу после создания формы
+
+    // Обновляем таблицу после создания формы
+    updateTableContent(practicePlans, documentData);
 }
+
 
 function populateSelectOptions(selectElement, field) {
     let options = [];
@@ -129,24 +149,33 @@ function populateSelectOptions(selectElement, field) {
     selectElement.value = documentData[field] || options[0];
 }
 
-function handleInputChange(event) {
-    documentData[event.target.name] = event.target.value.trim();
-    saveDocumentData(); // Сохраняем данные в localStorage при каждом изменении
-    updateDocument();  // Обновляем документ после изменения данных
-}
-
 function handlePracticeTypeChange(event) {
     documentData[event.target.name] = event.target.value.trim();
-    const practiceTypeSelect = document.querySelector('select[name="Тип практики"]');
-    if (practiceTypeSelect) {
-        populateSelectOptions(practiceTypeSelect, "Тип практики");
-        practiceTypeSelect.selectedIndex = 0;
-        documentData["Тип практики"] = practiceTypeSelect.value;
+
+    if (event.target.name === "Вид практики") {
+        // Когда выбран новый вид практики, нужно обновить список типов практики
+        const practiceTypeSelect = document.querySelector('select[name="Тип практики"]');
+        if (practiceTypeSelect) {
+            populateSelectOptions(practiceTypeSelect, "Тип практики");
+
+            // Устанавливаем первый доступный тип практики для выбранного вида
+            const availableTypes = practiceTypeSelect.options;
+            if (availableTypes.length > 0) {
+                practiceTypeSelect.selectedIndex = 0;
+                documentData["Тип практики"] = availableTypes[0].value;
+            } else {
+                documentData["Тип практики"] = "";
+            }
+        }
     }
+
     saveDocumentData(); // Сохраняем данные в localStorage при каждом изменении
     updateDocument();
-    updateTableContent(practicePlans, documentData); // Обновляем таблицы в зависимости от типа практики
+
+    // Обновляем таблицу после смены типа практики или вида практики
+    updateTableContent(practicePlans, documentData);
 }
+
 
 function applyStyles(cssPath) {
     let link = document.querySelector('link[data-template-css]');

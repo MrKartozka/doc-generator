@@ -19,6 +19,10 @@ body {
     margin-left: 10mm;
 }
 
+.page-break {
+    break-before: page;
+}
+
 .pagedjs_pages {
     display: flex;
     width: calc(var(--pagedjs-width) * 1);
