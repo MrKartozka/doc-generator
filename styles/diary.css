@@ -4,7 +4,6 @@ body {
     padding: 0;
     counter-reset: section;
     background: white !important;
-    /* Убедимся, что фон белый */
 }
 
 .container {
