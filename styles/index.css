@@ -74,12 +74,10 @@
 
 .hidden-line {
     display: none;
-    /* Скрытие незаполненных строк */
 }
 
 .line {
     border-bottom: none;
-    /* Убираем подчеркивание у всех элементов */
 }
 
 .line:empty {
@@ -87,7 +85,6 @@
 }
 
 @media print {
-
     .sidebar,
     .inputs-container,
     .header-title {
@@ -112,8 +109,6 @@
         margin: 20mm;
     }
 }
-
-
 
 @media (max-width: 768px) {
     .app {

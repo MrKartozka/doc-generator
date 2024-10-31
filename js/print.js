@@ -1,10 +1,10 @@
 function printDocument() {
     saveDocumentData();
 
-    const contentContainer = document.getElementById('preview-container');
+    const contentContainer = document.getElementById("preview-container");
     const contentHtml = contentContainer.innerHTML;
 
-    const printWindow = window.open('', '_blank');
+    const printWindow = window.open("", "_blank");
 
     printWindow.document.write(`
         <html>
@@ -63,5 +63,6 @@ function printDocument() {
     };
 }
 
-// Привязка функции печати к кнопке
-document.querySelector('.print-button').addEventListener('click', printDocument);
+document
+    .querySelector(".print-button")
+    .addEventListener("click", printDocument);
