@@ -238,4 +238,5 @@ function updateDocument() {
             console.error("Ошибка при обновлении документа:", error)
         );
 }
+
 window.updateDocument = updateDocument;
