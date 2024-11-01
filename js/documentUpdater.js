@@ -232,6 +232,7 @@ function updateDocument() {
             );
 
             contentContainer.innerHTML = data;
+            
         })
         .catch((error) =>
             console.error("Ошибка при обновлении документа:", error)
