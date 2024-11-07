@@ -54,7 +54,7 @@ function loadPracticePlans() {
     .then((response) => response.json())
     .then((data) => {
       practicePlans = data;
-      loadDiary(); // Загружаем дневник после загрузки practicePlans
+      loadDiary();
     })
     .catch((error) =>
       console.error("Ошибка при загрузке practicePlans.json:", error)
@@ -112,10 +112,9 @@ function loadDiary() {
 
 function handleInputChange(event) {
   documentData[event.target.name] = event.target.value.trim();
-  saveDocumentData(); // Сохраняем данные в localStorage при каждом изменении
-  updateDocument(); // Обновляем документ после изменения данных
+  saveDocumentData();
+  updateDocument();
 
-  // Вызываем обновление таблицы, если поле связано с типом или видом практики
   if (
     event.target.name === "Тип практики" ||
     event.target.name === "Вид практики"
@@ -173,9 +172,8 @@ function createForm(content) {
     container.appendChild(inputGroup);
   });
 
-  updateDocument(); // Обновляем документ сразу после создания формы
+  updateDocument();
 
-  // Обновляем таблицу после создания формы
   updateTableContent(practicePlans, documentData);
 }
 
@@ -212,14 +210,12 @@ function handlePracticeTypeChange(event) {
   documentData[event.target.name] = event.target.value.trim();
 
   if (event.target.name === "Вид практики") {
-    // Когда выбран новый вид практики, нужно обновить список типов практики
     const practiceTypeSelect = document.querySelector(
       'select[name="Тип практики"]'
     );
     if (practiceTypeSelect) {
       populateSelectOptions(practiceTypeSelect, "Тип практики");
 
-      // Устанавливаем первый доступный тип практики для выбранного вида
       const availableTypes = practiceTypeSelect.options;
       if (availableTypes.length > 0) {
         practiceTypeSelect.selectedIndex = 0;
@@ -230,10 +226,9 @@ function handlePracticeTypeChange(event) {
     }
   }
 
-  saveDocumentData(); // Сохраняем данные в localStorage при каждом изменении
+  saveDocumentData();
   updateDocument();
 
-  // Обновляем таблицу после смены типа практики или вида практики
   updateTableContent(practicePlans, documentData);
 }
 

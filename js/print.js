@@ -63,7 +63,6 @@ function printDocument() {
   };
 }
 
-// Привязка функции печати к кнопке
 document
   .querySelector(".print-button")
   .addEventListener("click", printDocument);

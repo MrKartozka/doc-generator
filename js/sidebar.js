@@ -36,11 +36,9 @@ function createSidebar() {
     return;
   }
 
-  const templates = [
-    { text: "Отчет по производственной практике", template: "report" },
-    { text: "Дневник практики", template: "diary" },
-    { text: "Предпросмотр", template: "preview" },
-  ];
-
-  // Здесь можно добавить код для создания элементов бокового меню, если он не был добавлен ранее.
+  // const templates = [
+  //   { text: "Отчет по производственной практике", template: "report" },
+  //   { text: "Дневник практики", template: "diary" },
+  //   { text: "Предпросмотр", template: "preview" },
+  // ];
 }
