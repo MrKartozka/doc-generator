@@ -1,101 +1,114 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    counter-reset: section;
-    background: white !important;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  counter-reset: section;
+  background: white !important;
+  /* Убедимся, что фон белый */
 }
 
 .container {
-    width: 100%;
-    overflow: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    page-break-inside: avoid;
+  width: 100%;
+  overflow: visible !important;
+  height: auto !important;
+  max-height: none !important;
+  page-break-inside: avoid;
 }
 
 .line-container {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-    margin-bottom: 3px;
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  margin-bottom: 3px;
+  /* font-size: 14pt; */
 }
 
 .label {
-    white-space: nowrap;
+  white-space: nowrap;
+  /* font-size: 14pt; */
 }
 
-.line {
-    flex: 1;
-    border-bottom: 1px solid black;
-    margin-left: 10px;
+.line:not(.underline-none) {
+  flex: 1;
+  border-bottom: 1px solid black;
+  margin-left: 10px;
+  /* font-size: 14pt; */
 }
 
 .line-center {
-    flex: 1;
-    margin-left: 10px;
+  flex: 1;
+  margin-left: 10px;
+  /* font-size: 14pt; */
 }
 
 .fixed-line {
-    border-bottom: 1px solid black;
-    display: inline-block;
-    width: 150px;
-    margin-left: 10px;
+  border-bottom: 1px solid black;
+  display: inline-block;
+  width: 150px;
+  margin-left: 10px;
+  /* font-size: 14pt; */
 }
 
 .signature {
-    margin-right: 0;
-    text-align: right;
-    display: inline-block;
-    width: calc(100% - 150px);
+  margin-right: 0;
+  text-align: right;
+  display: inline-block;
+  width: calc(100% - 150px);
 }
 
 .center-text {
-    text-align: center;
+  text-align: center;
 }
 
 .table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  /* font-size: 14pt; */
 }
 
 .table th,
 .table td {
-    border: 1px solid black;
-    padding: 5px;
+  border: 1px solid black;
+  padding: 5px;
+  /* font-size: 14pt; */
 }
 
 .table th {
-    background-color: #f2f2f2;
-    text-align: left;
+  background-color: #f2f2f2;
+  /* font-size: 14pt; */
 }
 
 .middle-report-info {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .middle-report-end {
-    margin-top: 200px;
-    text-align: center;
+  margin-top: 200px;
+  /* Если этот отступ съезжает, уменьшите его */
+  text-align: center;
+  /* Центрируем текст */
 }
 
 .page-break {
-    page-break-before: always;
+  page-break-before: always;
 }
 
 .line-style {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  margin-bottom: 15px;
+  /* font-size: 14pt; */
 }
 
 .multiline_text {
-    flex: 1;
+  flex: 1;
+  /* font-size: 14pt; */
 }
 
 .line-multiline {
-    flex: 1;
-    border-bottom: 1px solid black;
-    margin-left: 10px;
+  flex: 1;
+  border-bottom: 1px solid black;
+  margin-left: 10px;
+  /* font-size: 14pt; */
 }

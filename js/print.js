@@ -1,12 +1,12 @@
 function printDocument() {
-    saveDocumentData();
+  saveDocumentData();
 
-    const contentContainer = document.getElementById("preview-container");
-    const contentHtml = contentContainer.innerHTML;
+  const contentContainer = document.getElementById("preview-container");
+  const contentHtml = contentContainer.innerHTML;
 
-    const printWindow = window.open("", "_blank");
+  const printWindow = window.open("", "_blank");
 
-    printWindow.document.write(`
+  printWindow.document.write(`
         <html>
             <head>
                 <title>Печать документа</title>
@@ -54,15 +54,16 @@ function printDocument() {
         </html>
     `);
 
-    printWindow.document.close();
-    printWindow.focus();
+  printWindow.document.close();
+  printWindow.focus();
 
-    printWindow.print();
-    printWindow.onafterprint = function () {
-        printWindow.close();
-    };
+  printWindow.print();
+  printWindow.onafterprint = function () {
+    printWindow.close();
+  };
 }
 
+// Привязка функции печати к кнопке
 document
-    .querySelector(".print-button")
-    .addEventListener("click", printDocument);
+  .querySelector(".print-button")
+  .addEventListener("click", printDocument);
