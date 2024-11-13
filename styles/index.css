@@ -30,7 +30,6 @@
 
 .sidebar button.toggle-sidebar {
   align-self: flex-start;
-  /* margin: 10px; */
 }
 
 .sidebar .sidebar-content {
@@ -92,23 +91,15 @@
 
 .hidden-line {
   display: none;
-  /* Скрытие незаполненных строк */
 }
 
 .line {
   border-bottom: none;
-  /* Убираем подчеркивание у всех элементов */
 }
 
 .line-mono {
-  /* border-bottom: none;  */
   text-decoration: underline;
-  /* Убираем подчеркивание у всех элементов */
 }
-
-/* .line:empty {
-    visibility: hidden;
-} */
 
 @media print {
   .sidebar,
