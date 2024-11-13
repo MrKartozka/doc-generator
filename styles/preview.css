@@ -14,9 +14,9 @@ body {
 @page {
   size: A4;
   margin-top: 10mm;
-  margin-right: 10mm;
+  margin-right: 20mm;
   margin-bottom: 15mm;
-  margin-left: 10mm;
+  margin-left: 20mm;
 }
 
 .page-break {
